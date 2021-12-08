@@ -14,6 +14,18 @@ router.get('/getcity', function (req, res, next) {
     for (var i = 0; i < cities.length; i++) {
       console.log(cities[i]);
     }
+    var myRe = new RegExp("^" + req.query.q);
+    console.log(myRe);
+    var jsonresult = [];
+    for (var i = 0; i < cities.length; i++) {
+      var result = cities[i].search(myRe);
+      if (result != -1) {
+        console.log(cities[i]);
+        jsonresult.push({ city: cities[i] });
+      }
+    }
+    console.log(jsonresult);
+    res.status(200).json(jsonresult);
   });
 });
 
